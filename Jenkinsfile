@@ -1,12 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        sonarQube 'SonarScanner'
-    }
-
     environment {
-        DOCKER_IMAGE = "YOUR_DOCKER_USERNAME/ml-quality-pipeline:latest"
+        DOCKER_IMAGE = "YOUR_DOCKERHUB_USERNAME/jenkins-sonar-dockerhub:latest"
     }
 
     stages {
@@ -14,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/YOUR_USERNAME/ml-quality-pipeline.git'
+                url: 'https://github.com/Nithishreddyyyy/Jenkins-Sonar-DockerHub.git'
             }
         }
 
@@ -30,7 +26,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarCloud') {
                     sh '''
-                    sonar-scanner
+                    /opt/homebrew/bin/sonar-scanner
                     '''
                 }
             }
